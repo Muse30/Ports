@@ -246,6 +246,8 @@ namespace Ports.Riven
                                 if (!riventarget().HasBuffOfType(BuffType.Stun))
                                     r.CastIfHitchanceEquals(riventarget(), HitChance.Medium);
                             }
+
+                            q.Cast(riventarget().ServerPosition);
                         }
                     }
 
@@ -1477,7 +1479,6 @@ namespace Ports.Riven
         }
 
 
-  
         private static int lastQDelay;
         private static int QNum = 0;
         static void Obj_AI_Base_OnPlayAnimation(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)
