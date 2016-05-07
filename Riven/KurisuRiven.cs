@@ -246,8 +246,7 @@ namespace Ports.Riven
                                 if (!riventarget().HasBuffOfType(BuffType.Stun))
                                     r.CastIfHitchanceEquals(riventarget(), HitChance.Medium);
                             }
-
-                            q.Cast(riventarget().ServerPosition);
+                          
                         }
                     }
 
@@ -346,6 +345,8 @@ namespace Ports.Riven
                             canmv = true;
                             canaa = true;
                         });
+
+                        q.Cast(riventarget().ServerPosition);
                     }
                 }
 
@@ -460,7 +461,7 @@ namespace Ports.Riven
 
             keybindsMenu = rivenMenu.AddSubMenu("keybinds Options");
             keybindsMenu.Add("shycombo", new KeyBind("Burst Combo", false, KeyBind.BindTypes.HoldActive, "T".ToCharArray()[0]));
-            keybindsMenu.Add("semiq", new CheckBox("Auto Q Harass/Jungle"));
+            keybindsMenu.Add("semiq", new CheckBox("Auto Q Harass/Jungle", false));
 
 
             drawMenu = rivenMenu.AddSubMenu("Drawings Options");
@@ -475,7 +476,7 @@ namespace Ports.Riven
             qMenu.Add("wq3", new CheckBox("Ward + Q3 (Flee)"));
             qMenu.Add("qint", new CheckBox("Interrupt with 3rd Q"));
             qMenu.Add("keepq", new CheckBox("Use Q Before Expiry"));
-            qMenu.Add("usegap", new CheckBox("Gapclose with Q"));
+            qMenu.Add("usegap", new CheckBox("Gapclose with Q", false));
             qMenu.Add("gaptimez", new Slider("Gapclose Q Delay (ms)", 115, 0, 200));
             qMenu.Add("q1delay", new Slider("Q1 animation reset delay {0}ms default 293", 291, 0, 500));
             qMenu.Add("q2delay", new Slider("Q2 animation reset delay {0}ms default 293", 291, 0, 500));
@@ -484,13 +485,15 @@ namespace Ports.Riven
 
             wMenu = rivenMenu.AddSubMenu("W Options");
             wMenu.Add("req", new CheckBox("Required Targets"));
+            wMenu.AddSeparator();
             foreach (var hero in HeroManager.Enemies)
             {
                 wMenu.Add("w" + hero.ChampionName, new CheckBox("Only W if it will hit: " + hero.ChampionName));
 
             }
+            wMenu.AddSeparator();
             wMenu.Add("usecombow", new CheckBox("Use W in Combo"));
-            wMenu.Add("fq", new CheckBox("-> Q after W"));
+            wMenu.Add("fq", new CheckBox("Ignore for now", false));
             wMenu.Add("wint", new CheckBox("Use on Interrupt"));
 
             eMenu = rivenMenu.AddSubMenu("E Options");
@@ -508,11 +511,14 @@ namespace Ports.Riven
 
             r2Menu = rivenMenu.AddSubMenu("R2 Options");
             r2Menu.Add("req2", new CheckBox("Required Targets"));
+            r2Menu.AddSeparator();
+
             foreach (var hero in HeroManager.Enemies)
             {
                 r2Menu.Add("r" + hero.ChampionName, new CheckBox("Only R2 if it will hit: " + hero.ChampionName));
 
             }
+            r2Menu.AddSeparator();
 
             r2Menu.Add("usews", new CheckBox("Use R2 in Combo"));
             r2Menu.Add("overaa", new Slider("Dont R2 if target will die in AA",  2, 1, 6));
