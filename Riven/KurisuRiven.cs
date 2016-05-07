@@ -181,7 +181,6 @@ namespace Ports.Riven
 
             Obj_AI_Base.OnPlayAnimation += Obj_AI_Base_OnPlayAnimation;
             Interrupter();
-            OnGapcloser();
             Obj_AI_Base.OnProcessSpellCast += Obj_AI_Base_OnProcessSpellCast;
             Drawings();
             OnMenuLoad();
@@ -491,7 +490,6 @@ namespace Ports.Riven
             wMenu.Add("usecombow", new CheckBox("Use W in Combo"));
             wMenu.Add("fq", new CheckBox("-> Q after W"));
             wMenu.Add("wint", new CheckBox("Use on Interrupt"));
-            wMenu.Add("wgap", new CheckBox("Use on Gapcloser"));
 
             eMenu = rivenMenu.AddSubMenu("E Options");
             eMenu.Add("usecomboe", new CheckBox("Use E in Combo"));
@@ -1024,7 +1022,7 @@ namespace Ports.Riven
                 {
                     if (unit.Distance(player.ServerPosition) <= w.Range + 25)
                     {
-                        w.Cast(unit);
+                        w.Cast();
                     }
                 }
 
@@ -1074,7 +1072,7 @@ namespace Ports.Riven
                             if (Items.CanUseItem(3074))
                                 Items.UseItem(3074);
 
-                            w.Cast(unit);
+                            w.Cast();
                         }
                     }
                 }
@@ -1453,7 +1451,7 @@ namespace Ports.Riven
                     if (!sender.Position.UnderTurret(true))
                     {
                         if (sender.IsValidTarget(w.Range))
-                            w.Cast(sender);
+                            w.Cast();
 
                         if (sender.IsValidTarget(w.Range + e.Range) && e.IsReady())
                         {
@@ -1478,26 +1476,8 @@ namespace Ports.Riven
             };
         }
 
-        private static void OnGapcloser()
-        {
-            AntiGapcloser.OnEnemyGapcloser += gapcloser =>
-            {
-                if (Getcheckboxvalue(wMenu, "wgap") && w.IsReady())
-                {
-                    if (gapcloser.Sender.IsValidTarget(w.Range))
-                    {
-                        if (!gapcloser.Sender.ServerPosition.UnderTurret(true))
-                        {
-                            if (!isteamfightkappa || Getcheckboxvalue(wMenu, "w" + gapcloser.Sender.ChampionName) || isteamfightkappa && !wrektAny())
-                            {
-                                w.Cast(gapcloser.Sender);
-                            }
-                        }
-                    }
-                }
-            };
-        }
 
+  
         private static int lastQDelay;
         private static int QNum = 0;
         static void Obj_AI_Base_OnPlayAnimation(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)
