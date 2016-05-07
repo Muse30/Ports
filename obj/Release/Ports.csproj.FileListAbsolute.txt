@@ -1,0 +1,12 @@
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\obj\Release\Ports.csprojResolveAssemblyReference.cache
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\bin\Release\Ports.exe
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\bin\Release\Ports.pdb
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\bin\Release\EloBuddy.dll
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\bin\Release\EloBuddy.Sandbox.dll
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\bin\Release\EloBuddy.SDK.dll
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\bin\Release\Newtonsoft.Json.dll
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\bin\Release\SharpDX.Direct3D9.dll
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\bin\Release\SharpDX.dll
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\bin\Release\SharpDX.XInput.dll
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\obj\Release\Ports.exe
+C:\Users\Pabloo.PABLO\Documents\Visual Studio 2015\Projects\Ports\Ports\obj\Release\Ports.pdb
