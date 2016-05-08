@@ -25,7 +25,9 @@ namespace Ports.Riven
         private static int lastaa;
         private static int lasthd;
         private static int lastwd;
+        public static bool _forceQ;
         public static float _lastR;
+        public static AttackableUnit _qtarget;
 
         private static bool canq;
         private static bool canw;
@@ -229,7 +231,15 @@ namespace Ports.Riven
                  player.GetEnemiesInRange(1250).Any(ez => Getcheckboxvalue(r2Menu, "r" + ez.ChampionName));
         }
 
+
         #region Riven: OnDoCast
+
+        public static void ForceCastQ(AttackableUnit target)
+        {
+            _forceQ = true;
+            _qtarget = target;
+        }
+
         private static void OnDoCast()
         {
             Obj_AI_Base.OnSpellCast += (sender, args) =>
@@ -247,6 +257,11 @@ namespace Ports.Riven
 
                                 if (!riventarget().HasBuffOfType(BuffType.Stun))
                                     r.CastIfHitchanceEquals(riventarget(), HitChance.Medium);
+                            }
+
+                            if (q.IsReady() && Getkeybindvalue(keybindsMenu, "shycombo"))
+                            {
+                                Utility.DelayAction.Add(0, () => ForceCastQ(riventarget()));
                             }
                           
                         }
@@ -348,7 +363,6 @@ namespace Ports.Riven
                             canaa = true;
                         });
 
-                        q.Cast(riventarget().ServerPosition);
                     }
                 }
 
@@ -391,7 +405,7 @@ namespace Ports.Riven
 
             if (Getkeybindvalue(keybindsMenu, "shycombo"))
             {
-                OrbTo(riventarget(), 350);
+                OrbTo2(riventarget(), 350);
 
                 if (riventarget().IsValidTarget())
                 {
@@ -1049,7 +1063,7 @@ namespace Ports.Riven
                         if (canhd) return;
 
                         if (qtarg != null && qtarg.NetworkId == unit.NetworkId)
-                            q.Cast(unit.ServerPosition);
+                            ForceCastQ(unit);
                     }
                 }
             }
@@ -1374,6 +1388,7 @@ namespace Ports.Riven
                         lastq = Utils.GameTimeTickCount;
                         canq = false;
                         canmv = false;
+                        _forceQ = false;
 
                         var dd = new[] { 280 - Game.Ping, 290 - Game.Ping, 380 - Game.Ping };
                         Utility.DelayAction.Add(dd[cc - 1], () =>
@@ -1547,6 +1562,7 @@ namespace Ports.Riven
             if (Getcheckboxvalue(animation, "qReset"))
             {
                 EloBuddy.Player.DoEmote(Emote.Dance);
+                Orbwalker.ResetAutoAttack();
             }
             else if (Getcheckboxvalue(animation, "Qstrange") && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None))
             {
@@ -1563,23 +1579,6 @@ namespace Ports.Riven
           //  Utils.Debug("delay " + Core.GameTickCount);
             if (q.IsReady())
                 Player.CastSpell(SpellSlot.Q, Game.CursorPos);
-        }
-        private static void DanceIfNotAborted()
-        {
-            Player.DoEmote(Emote.Dance);
-            //if (Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.None)
-            //    Player.IssueOrder(GameObjectOrder.MoveTo, Player.Instance.Position + (new Vector3(1.0f, 0, -1.0f)));
-            //Orbwalker.ResetAutoAttack();
-            /*if (ComboTarget != null && ComboTarget.IsValidTarget(_Player.AttackRange))
-            {
-                Player.IssueOrder(GameObjectOrder.AttackUnit, ComboTarget);
-                return;
-            }*/
-            /*if (JCTarget != null && JCTarget.IsValidTarget(_Player.AttackRange))
-            {
-                Player.IssueOrder(GameObjectOrder.AttackUnit, ComboTarget);
-                return;
-            }*/
         }
 
         #endregion
@@ -1664,6 +1663,23 @@ namespace Ports.Riven
                     Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
                 }
             }
+}
+         private static void OrbTo2(Obj_AI_Base target, float rangeoverride = 0f)
+        {
+            if (canmv)
+            {
+                if (Getkeybindvalue(keybindsMenu, "shycombo"))
+                {
+                    if (target.IsValidTarget(truerange + 100))
+                        Orbwalker.ForcedTarget = target;
+                    Orbwalker.OrbwalkTo(target.ServerPosition);
+                }
+
+                else
+                    
+                    Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
+                }
+            
 
             if (canmv && canaa)
             {
