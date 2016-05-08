@@ -8,6 +8,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
+using ItemData = LeagueSharp.Common.Data.ItemData;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 using Prediction = LeagueSharp.Common.Prediction;
@@ -24,6 +25,7 @@ namespace Ports.Riven
         private static int lastaa;
         private static int lasthd;
         private static int lastwd;
+        public static float _lastR;
 
         private static bool canq;
         private static bool canw;
@@ -33,7 +35,7 @@ namespace Ports.Riven
         private static bool canws;
         private static bool canhd;
         private static bool hashd;
-
+        public static int _qstack = 1;
         public static int LastAATick;
 
         private static bool didq;
@@ -45,7 +47,7 @@ namespace Ports.Riven
         private static bool didhs;
         private static bool ssfl;
 
-        public static Menu rivenMenu, farmMenu, harassMenu, keybindsMenu, qMenu, wMenu, eMenu, r1Menu, r2Menu, drawMenu;
+        public static Menu rivenMenu, farmMenu, harassMenu, keybindsMenu, qMenu, wMenu, eMenu, r1Menu, r2Menu, drawMenu, animation;
 
         private static Spell q, w, e, r;
         private static AIHeroClient player = ObjectManager.Player;
@@ -413,7 +415,7 @@ namespace Ports.Riven
 
                         else
                         {
-                            Utility.DelayAction.Add(20, () => w.Cast());
+                            Utility.DelayAction.Add(20, () => w.Cast(riventarget()));
                         }
                     }
 
@@ -463,6 +465,14 @@ namespace Ports.Riven
             keybindsMenu.Add("shycombo", new KeyBind("Burst Combo", false, KeyBind.BindTypes.HoldActive, "T".ToCharArray()[0]));
             keybindsMenu.Add("semiq", new CheckBox("Auto Q Harass/Jungle", false));
 
+            animation = rivenMenu.AddSubMenu("Animation", "Animation");
+            animation.Add("qReset", new CheckBox("Fast & Legit Q"));
+            animation.AddSeparator();
+            animation.Add("Qstrange", new CheckBox("Enable", false));
+            animation.Add("animLaugh", new CheckBox("Laugh", false));
+            animation.Add("animTaunt", new CheckBox("Taunt", false));
+            animation.Add("animTalk", new CheckBox("Joke", false));
+            animation.Add("animDance", new CheckBox("Dance", false));
 
             drawMenu = rivenMenu.AddSubMenu("Drawings Options");
             drawMenu.Add("linewidth", new Slider("Line Width", 1, 1, 6));
@@ -478,10 +488,8 @@ namespace Ports.Riven
             qMenu.Add("keepq", new CheckBox("Use Q Before Expiry"));
             qMenu.Add("usegap", new CheckBox("Gapclose with Q", false));
             qMenu.Add("gaptimez", new Slider("Gapclose Q Delay (ms)", 115, 0, 200));
-            qMenu.Add("q1delay", new Slider("Q1 animation reset delay {0}ms default 293", 291, 0, 500));
-            qMenu.Add("q2delay", new Slider("Q2 animation reset delay {0}ms default 293", 291, 0, 500));
-            qMenu.Add("q3delay", new Slider("Q3 animation reset delay {0}ms default 393", 393, 0, 500));
-            qMenu.Add("alwayscancel", new CheckBox("Cancel animation from manual Qs"));
+            qMenu.Add("QD", new Slider("Ping Delay", 56, 20, 300));
+            qMenu.Add("QLD", new Slider("Spell Delay", 56, 20, 300));
 
             wMenu = rivenMenu.AddSubMenu("W Options");
             wMenu.Add("req", new CheckBox("Required Targets"));
@@ -1459,7 +1467,7 @@ namespace Ports.Riven
                     if (!sender.Position.UnderTurret(true))
                     {
                         if (sender.IsValidTarget(w.Range))
-                            w.Cast();
+                            w.Cast(sender);
 
                         if (sender.IsValidTarget(w.Range + e.Range) && e.IsReady())
                         {
@@ -1485,50 +1493,69 @@ namespace Ports.Riven
         }
 
 
-        private static int lastQDelay;
-        private static int QNum = 0;
+
         static void Obj_AI_Base_OnPlayAnimation(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)
         {
-            if (player.IsDead) return;
             if (!sender.IsMe) return;
-            int delay = 0;
-            switch (args.Animation)
+            var t = 0;
+            switch (args.Animation) // Logic from Fluxy
             {
                 case "Spell1a":
-                    delay = Getslidervalue(qMenu, "q1delay");
-                    lastq = Core.GameTickCount;
-                    QNum = 1;
+                    lastq = Utils.GameTimeTickCount;
+                    t = 291;
+                    _qstack = 2;
                     break;
                 case "Spell1b":
-                    delay = Getslidervalue(qMenu, "q2delay");
-                    lastq = Core.GameTickCount;
-                    QNum = 2;
+                    lastq = Utils.GameTimeTickCount;
+                    t = 291;
+                    _qstack = 3;
                     break;
-                case "Spell1c":
-                    delay = Getslidervalue(qMenu, "q3delay");
-                    lastq = Core.GameTickCount;
-                    QNum = 3;
+                case "Spell1c": // q3?
+                    lastq = Utils.GameTimeTickCount;
+                    t = 343;
+                    _qstack = 1;
                     break;
-                case "Dance":
-                    if (lastq > Core.GameTickCount - 500)
-                    {
-
-                        //Orbwalker.ResetAutoAttack();
-                        //Utils.Debug("reset");
-                    }
-
+                case "Spell2":
+                    t = 170;
+                    break;
+                case "Spell3":
+                    if (Getkeybindvalue(keybindsMenu, "shycombo") || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo)
+                         || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))
+                        CastYoumoo();
+                    break;
+                case "Spell4a":
+                    t = 0;
+                    _lastR = Utils.GameTimeTickCount;
+                    break;
+                case "Spell4b":
+                    t = 150;
+                    var target = TargetSelector.SelectedTarget;
+                    if (q.IsReady() && target.IsValidTarget()) ForceQ();
                     break;
             }
 
-            if (delay != 0 && (Orbwalker.ActiveModesFlags != Orbwalker.ActiveModes.None || Getcheckboxvalue(qMenu, "alwayscancel")))
+            if (t != 0 && (Orbwalker.ActiveModesFlags != Orbwalker.ActiveModes.None))
             {
-                lastQDelay = delay;
                 Orbwalker.ResetAutoAttack();
-                Core.DelayAction(DanceIfNotAborted, delay - Game.Ping);
-                //Utils.Debug("reset"); 
+                Core.DelayAction(CancelAnimation, t - Getslidervalue(qMenu, "QLD") - (Game.Ping - Getslidervalue(qMenu, "QD")));
             }
+        }
 
 
+        private static void CancelAnimation()
+        {
+            if (Getcheckboxvalue(animation, "qReset"))
+            {
+                EloBuddy.Player.DoEmote(Emote.Dance);
+            }
+            else if (Getcheckboxvalue(animation, "Qstrange") && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None))
+            {
+                if (Getcheckboxvalue(animation, "animDance")) EloBuddy.Player.DoEmote(Emote.Dance);
+                if (Getcheckboxvalue(animation, "animLaugh")) EloBuddy.Player.DoEmote(Emote.Laugh);
+                if (Getcheckboxvalue(animation, "animTaunt")) EloBuddy.Player.DoEmote(Emote.Taunt);
+                if (Getcheckboxvalue(animation, "animTalk")) EloBuddy.Player.DoEmote(Emote.Joke);
+            }
+            Orbwalker.ResetAutoAttack();
         }
 
         private static void ForceQ()
@@ -1558,6 +1585,13 @@ namespace Ports.Riven
         #endregion
 
         #region Riven: Aura
+
+
+        public static void CastYoumoo()
+        {
+            if (ItemData.Youmuus_Ghostblade.GetItem().IsReady()) ItemData.Youmuus_Ghostblade.GetItem().Cast();
+        }
+
 
         private static void AuraUpdate()
         {
@@ -1626,7 +1660,8 @@ namespace Ports.Riven
                         Orbwalker.OrbwalkTo(target.ServerPosition);
 
                     else
-                        Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
+                    
+                    Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
                 }
             }
 
