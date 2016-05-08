@@ -23,11 +23,8 @@ namespace Ports
 
 
             switch (ObjectManager.Player.ChampionName.ToLower())
-            {
-                case "lucian": // BrianSharp's Aatrox
-                    Ports.Lucian.Program.Game_OnGameLoad();
-                    break;
-                case "riven": // DZAhri
+            { 
+                case "riven": // Kurisu Riven
                     Ports.Riven.Program.Game_OnGameLoad();
                     break;           
                 default:

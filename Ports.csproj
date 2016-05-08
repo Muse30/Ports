@@ -100,7 +100,6 @@
     <Compile Include="LeagueSharp-Common\WeightedRandom.cs" />
     <Compile Include="LeagueSharp-Common\WindowsMessages.cs" />
     <Compile Include="LeagueSharp-Common\WndEventComposition.cs" />
-    <Compile Include="Lucian\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Riven\HpBarIndicator.cs" />
     <Compile Include="Riven\KurisuRiven.cs" />
