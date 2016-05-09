@@ -27,7 +27,7 @@ namespace Ports
                 case "riven": // Kurisu Riven
                     Ports.Riven.Program.Game_OnGameLoad();
                     break;
-                case "zed": // Kurisu Riven
+                case "zed": // Zed is Back
                     Zed.Program.Game_OnGameLoad();
                     break;
                 default:
