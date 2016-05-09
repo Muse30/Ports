@@ -27,6 +27,9 @@ namespace Ports
                 case "riven": // Kurisu Riven
                     Ports.Riven.Program.Game_OnGameLoad();
                     break;
+                case "zed": // Kurisu Riven
+                    Zed.Program.Game_OnGameLoad();
+                    break;
                 default:
                     Chat.Print("This champion is not supported yet! - Berb");
                     break;

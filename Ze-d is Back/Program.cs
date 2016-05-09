@@ -47,7 +47,7 @@ namespace Zed
         private static int delayw = 500;
 
 
-        private static void Game_OnGameLoad(EventArgs args)
+        public static void Game_OnGameLoad()
         {
                 _player = ObjectManager.Player;
                 if (ObjectManager.Player.BaseSkinName != ChampionName) return;
@@ -116,7 +116,6 @@ namespace Zed
                 miscMenu.Add("UseIgnitekill", new CheckBox("Use Ignite KillSteal"));
                 miscMenu.Add("UseQM", new CheckBox("Use Q KillSteal"));
                 miscMenu.Add("UseEM", new CheckBox("Use E KillSteal"));
-                miscMenu.Add("AutoE", new CheckBox("Auto E"));
                 miscMenu.Add("rdodge", new CheckBox("R Dodge Dangerous"));
                 foreach (var e in enemy)
                 {
@@ -217,10 +216,7 @@ namespace Zed
             {
                 LastHit();
             }
-            if (Getcheckboxvalue(miscMenu, "AutoE"))
-            {
-                CastE(target);
-            }
+
 
             if (Environment.TickCount >= clockon && countdanger > countults)
             {
