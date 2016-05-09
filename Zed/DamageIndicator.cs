@@ -60,7 +60,7 @@ namespace Zed
 
                 Drawing.DrawLine(xPosDamage, yPos, xPosDamage, yPos + Height / 2, 2, Color);
 
-                if (Program.Getcheckboxvalue(Program.drawMenu, "DrawHP"))
+                if (Program.getCheckBoxItem(Program.drawMenu, "DrawHP"))
                 {
                     var differenceInHP = xPosCurrentHp - xPosDamage;
                     var pos1 = barPos.X + 9 + (107 * percentHealthAfterDamage);
