@@ -18,7 +18,6 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Security.AccessControl;
 using System;
-using System.Speech.Synthesis;
 
 namespace NechritoRiven
 {
