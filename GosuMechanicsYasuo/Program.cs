@@ -13,6 +13,7 @@ using Utility = LeagueSharp.Common.Utility;
 using Damage = LeagueSharp.Common.Damage;
 using Prediction = LeagueSharp.Common.Prediction;
 using EloBuddy.SDK.Menu;
+using EloBuddy.SDK.Notifications;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Events;
 
@@ -100,10 +101,12 @@ namespace GosuMechanicsYasuo
             {
                 Flash = new Spell(slot, 425);
             }
-         
+
+            Notifications.Show(new SimpleNotification("Yasuo", "Dont use this is not working yet!"), 10000);
+
             Chat.Print("GosuMechanics Yasuo Loaded!");
-            Chat.Print("Credits to BestTuks for his Windwall and E-vade functions!");
-            Chat.Print("Thank You very much sensei! :)");
+            Chat.Print("DONT USE THIS IS NOT WORKING YET!");
+
 
             yasmenu = MainMenu.AddMenu("Yasuo", "Yasuo");
 
@@ -1174,7 +1177,7 @@ namespace GosuMechanicsYasuo
             float closest = float.MaxValue;
             Obj_AI_Base closestTarg = null;
             float currentDashSpeed = 700 + myHero.MoveSpeed;
-            foreach (Obj_AI_Base enemy in ObjectManager.Get<Obj_AI_Base>().Where(ob => ob.NetworkId != skillShot.Unit.NetworkId && enemyIsJumpable(ob) && ob.Distance(myHero) < E.Range).OrderBy(ene => ene.Distance(Game.CursorPos, true)))
+            foreach (Obj_AI_Base enemy in ObjectManager.Get<Obj_AI_Minion>().Where(ob => ob.NetworkId != skillShot.Unit.NetworkId && enemyIsJumpable(ob) && ob.Distance(myHero) < E.Range).OrderBy(ene => ene.Distance(Game.CursorPos, true)))
             {
                 var pPos = myHero.Position.To2D();
                 Vector2 posAfterE = V2E(myHero.Position, enemy.Position, 475);
