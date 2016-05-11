@@ -23,11 +23,8 @@ namespace Ports
             switch (ObjectManager.Player.ChampionName.ToLower())
             { 
                 case "riven": // Kurisu Riven
-                    Ports.Riven.Program.Game_OnGameLoad();
+                    NechritoRiven.Program.OnGameLoad();
                     break;
-                 case "zed": // Zed is Back
-                    iDZed.Zed.OnLoad();
-                       break; 
                 case "azir": // azir
                     HeavenStrikeAzir.Program.Game_OnGameLoad();
                     break;

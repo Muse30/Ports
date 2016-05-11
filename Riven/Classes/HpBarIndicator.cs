@@ -5,7 +5,7 @@ using SharpDX.Direct3D9;
 using Color = System.Drawing.Color;
 using EloBuddy;
 
-namespace Ports.Riven
+namespace NechritoRiven
 {
     internal class HpBarIndicator
     {

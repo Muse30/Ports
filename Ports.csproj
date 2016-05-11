@@ -131,16 +131,22 @@
     <Compile Include="LeagueSharp-Common\WndEventComposition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs" />
-    <Compile Include="Kurisu Riven\HpBarIndicator.cs" />
-    <Compile Include="Kurisu Riven\KurisuRiven.cs" />
-    <Compile Include="Kurisu Riven\Program.cs" />
+    <Compile Include="Riven\Classes\Dmg.cs" />
+    <Compile Include="Riven\Classes\FleeLogic.cs" />
+    <Compile Include="Riven\Classes\HpBarIndicator.cs" />
+    <Compile Include="Riven\Classes\Logic.cs" />
+    <Compile Include="Riven\Classes\MenuConfig.cs" />
+    <Compile Include="Riven\Classes\Modes\Burst.cs" />
+    <Compile Include="Riven\Classes\Modes\Combo.cs" />
+    <Compile Include="Riven\Classes\Modes\FastHarass.cs" />
+    <Compile Include="Riven\Classes\Modes\Flee.cs" />
+    <Compile Include="Riven\Classes\Modes\Harass.cs" />
+    <Compile Include="Riven\Classes\Modes\Jungle.cs" />
+    <Compile Include="Riven\Classes\Modes\Lane.cs" />
+    <Compile Include="Riven\Classes\Spells.cs" />
+    <Compile Include="Riven\Program.cs" />
     <Compile Include="Wrecking Ball Bubba Kush\ChampInfo.cs" />
     <Compile Include="Wrecking Ball Bubba Kush\WreckingBall.cs" />
-    <Compile Include="Zed\Utils\AssassinManager.cs" />
-    <Compile Include="Zed\Utils\ShadowManager.cs" />
-    <Compile Include="Zed\Utils\VectorHelper.cs" />
-    <Compile Include="Zed\Utils\ZedDamage.cs" />
-    <Compile Include="Zed\Zed.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
