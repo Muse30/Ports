@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using SharpDX.Direct3D9;
 
-namespace Zed
+namespace iDZed.Utils
 {
     internal class AssassinManager
     {
@@ -43,7 +43,7 @@ namespace Zed
                     Quality = FontQuality.ClearType
                 });
 
-            assMenu = Program.Config.AddSubMenu("Assassin Manager", "MenuAssassin");
+            assMenu = Zed.Menu.AddSubMenu("Assassin Manager", "MenuAssassin");
 
             assMenu.Add("AssassinActive", new CheckBox("Active"));
             assMenu.Add("AssassinSearchRange", new Slider(" Search Range", 1400, 1400, 2000));

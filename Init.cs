@@ -19,19 +19,26 @@ namespace Ports
         private static void Initialize(EventArgs args)
         {
 
-            // Misc.'s - Will add an option when the AIO is done to disable certain Utility Addons
-
 
             switch (ObjectManager.Player.ChampionName.ToLower())
             { 
                 case "riven": // Kurisu Riven
                     Ports.Riven.Program.Game_OnGameLoad();
                     break;
-                case "zed": // Zed is Back
-                    Zed.Program.Game_OnGameLoad();
+                 case "zed": // Zed is Back
+                    iDZed.Zed.OnLoad();
+                       break; 
+                case "azir": // azir
+                    HeavenStrikeAzir.Program.Game_OnGameLoad();
+                    break;
+                case "leesin": // bubba
+                    WreckingBall.WreckingBall.WreckingBallLoad();
+                    break;
+                case "lantern":
+                    AutoLantern.Program.OnGameLoad();
                     break;
                 default:
-                    Chat.Print("This champion is not supported yet! - Berb");
+                    Chat.Print("This champion is not supported yet!");
                     break;
             }
         }

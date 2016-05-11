@@ -65,6 +65,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoLantern\Program.cs" />
+    <Compile Include="Azir\AzirCombo.cs" />
+    <Compile Include="Azir\AzirFarm.cs" />
+    <Compile Include="Azir\AzirHarass.cs" />
+    <Compile Include="Azir\GameObjects.cs" />
+    <Compile Include="Azir\GeoAndExten.cs" />
+    <Compile Include="Azir\Insec.cs" />
+    <Compile Include="Azir\JumpToMouse.cs" />
+    <Compile Include="Azir\Minion.cs" />
+    <Compile Include="Azir\OrbwalkCommands.cs" />
+    <Compile Include="Azir\Program.cs" />
+    <Compile Include="Azir\Soldiers.cs" />
     <Compile Include="Init.cs" />
     <Compile Include="LeagueSharp-Common\AntiGapcloser.cs" />
     <Compile Include="LeagueSharp-Common\Circle.cs" />
@@ -94,6 +106,23 @@
     <Compile Include="LeagueSharp-Common\Prediction.cs" />
     <Compile Include="LeagueSharp-Common\Render.cs" />
     <Compile Include="LeagueSharp-Common\Spell.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\ArcPrediction.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\CirclePrediction.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\ClipperWrapper.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\Collision.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\ConePrediction.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\ConfigMenu.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\Drawings.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\Geometry.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\LinePrediction.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\Obj_AI_HeroExtensions.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\PathTracker.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\Prediction.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\RingPrediction.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\SpellExtensions.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\StasisPrediction.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\Utility.cs" />
+    <Compile Include="LeagueSharp-Common\SPrediction\VectorPrediction.cs" />
     <Compile Include="LeagueSharp-Common\StringList.cs" />
     <Compile Include="LeagueSharp-Common\Utility.cs" />
     <Compile Include="LeagueSharp-Common\Utils.cs" />
@@ -105,10 +134,13 @@
     <Compile Include="Kurisu Riven\HpBarIndicator.cs" />
     <Compile Include="Kurisu Riven\KurisuRiven.cs" />
     <Compile Include="Kurisu Riven\Program.cs" />
-    <Compile Include="Ze-d is Back\AssassinManager.cs" />
-    <Compile Include="Ze-d is Back\DamageIndicator.cs" />
-    <Compile Include="Ze-d is Back\DangerDB.cs" />
-    <Compile Include="Ze-d is Back\Program.cs" />
+    <Compile Include="Wrecking Ball Bubba Kush\ChampInfo.cs" />
+    <Compile Include="Wrecking Ball Bubba Kush\WreckingBall.cs" />
+    <Compile Include="Zed\Utils\AssassinManager.cs" />
+    <Compile Include="Zed\Utils\ShadowManager.cs" />
+    <Compile Include="Zed\Utils\VectorHelper.cs" />
+    <Compile Include="Zed\Utils\ZedDamage.cs" />
+    <Compile Include="Zed\Zed.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
