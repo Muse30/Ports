@@ -34,6 +34,9 @@ namespace Ports
                 case "lantern":
                     AutoLantern.Program.OnGameLoad();
                     break;
+                case "yasuo":
+                    GosuMechanicsYasuo.Program.Game_OnGameLoad();
+                    break;
                 default:
                     Chat.Print("This champion is not supported yet!");
                     break;
