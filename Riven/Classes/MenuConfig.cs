@@ -25,7 +25,7 @@ namespace NechritoRiven
     {
         public static Menu Config, animation, combo, lane, jngl, misc, draw, flee;
 
-        public static string menuName = "Nechrito Riven";
+        public static string menuName = "Nechrito/Kurisu Riven";
 
         public static void LoadMenu()
         {
