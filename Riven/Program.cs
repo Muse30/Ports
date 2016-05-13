@@ -426,12 +426,17 @@ namespace NechritoRiven
                 Drawing.DrawText(heropos.X + 76, heropos.Y + 40, MenuConfig.AlwaysF ? System.Drawing.Color.LimeGreen : System.Drawing.Color.Red, MenuConfig.AlwaysF ? "On" : "Off");
             }
 
+            if (MenuConfig.ForceBurst)
+            {
             Drawing.DrawText(heropos.X - 15, heropos.Y + 60, System.Drawing.Color.DodgerBlue, "Force Burst  (     )");
             Drawing.DrawText(heropos.X + 75, heropos.Y + 60, MenuConfig.burst ? System.Drawing.Color.LimeGreen : System.Drawing.Color.Red, MenuConfig.burst ? "On" : "Off");
+            }
 
+            if (MenuConfig.ForceHarass)
+            {
             Drawing.DrawText(heropos.X - 15, heropos.Y + 80, System.Drawing.Color.DodgerBlue, "Force Fast Harass  (     )");
             Drawing.DrawText(heropos.X + 119, heropos.Y + 80, MenuConfig.fastHar ? System.Drawing.Color.LimeGreen : System.Drawing.Color.Red, MenuConfig.fastHar ? "On" : "Off");
-
+            }
         }
         private static void OnPlay(Obj_AI_Base sender, GameObjectPlayAnimationEventArgs args)
         {

@@ -45,7 +45,7 @@ namespace NechritoRiven
             combo.Add("Burst", new KeyBind("Force Burst", false, KeyBind.BindTypes.PressToggle, 'T'));
             combo.Add("AlwaysR", new KeyBind("Force R", false, KeyBind.BindTypes.PressToggle, 'G'));
             combo.Add("AlwaysF", new KeyBind("Force Flash", false, KeyBind.BindTypes.PressToggle, 'L'));
-            combo.Add("usegap", new CheckBox("Gapclose with Q", false));
+            combo.Add("usegap", new CheckBox("Gapclose with Q", true));
             combo.Add("gaptimez", new Slider("Gapclose Q Delay (ms)", 115, 0, 200));
 
             lane = Config.AddSubMenu("Lane", "Lane");
@@ -70,6 +70,8 @@ namespace NechritoRiven
             draw.Add("Dind", new CheckBox("Damage Indicator"));
             draw.Add("DrawForceFlash", new CheckBox("Flash Status"));
             draw.Add("DrawAlwaysR", new CheckBox("R Status"));
+            draw.Add("ForceHarass", new CheckBox("Harass Status"));
+            draw.Add("ForceBurst", new CheckBox("Burst Status"));
             draw.Add("DrawTimer1", new CheckBox("Draw Q Expiry Time", false));
             draw.Add("DrawTimer2", new CheckBox("Draw R Expiry Time", false));
             draw.Add("DrawCB", new CheckBox("Combo Engage", false));
@@ -120,6 +122,8 @@ namespace NechritoRiven
         public static bool AnimDance => getCheckBoxItem(animation, "animDance");
         public static bool AnimTalk => getCheckBoxItem(animation, "animTalk");
         public static bool DrawAlwaysR => getCheckBoxItem(draw, "DrawAlwaysR");
+        public static bool ForceHarass => getCheckBoxItem(draw, "DrawForceHarass");
+        public static bool ForceBurst => getCheckBoxItem(draw, "DrawForceBurst");
         public static bool KeepQ => getCheckBoxItem(misc, "KeepQ");
         public static bool DrawFh => getCheckBoxItem(draw, "DrawFH");
         public static bool DrawTimer1 => getCheckBoxItem(draw, "DrawTimer1");
