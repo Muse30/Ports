@@ -70,8 +70,8 @@ namespace NechritoRiven
             draw.Add("Dind", new CheckBox("Damage Indicator"));
             draw.Add("DrawForceFlash", new CheckBox("Flash Status"));
             draw.Add("DrawAlwaysR", new CheckBox("R Status"));
-            draw.Add("ForceHarass", new CheckBox("Harass Status"));
-            draw.Add("ForceBurst", new CheckBox("Burst Status"));
+            draw.Add("DrawForceHarass", new CheckBox("Harass Status"));
+            draw.Add("DrawForceBurst", new CheckBox("Burst Status"));
             draw.Add("DrawTimer1", new CheckBox("Draw Q Expiry Time", false));
             draw.Add("DrawTimer2", new CheckBox("Draw R Expiry Time", false));
             draw.Add("DrawCB", new CheckBox("Combo Engage", false));
